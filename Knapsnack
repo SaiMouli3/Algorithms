@@ -1,0 +1,28 @@
+def maxprofit(requests):
+    n = len(requests)
+    s_r = sorted(requests, key=lambda x: x[1])
+    dp = [0] * (n + 1)
+    for i in range(1, n + 1):
+        s, f, v = s_r[i - 1]
+        lat = 0
+        for j in range(i, 0, -1):
+            if s_r[j - 1][1] <= s:
+                lat = j
+                break
+        dp[i] = max(dp[i - 1], v + dp[lat])
+
+    return dp[n]
+
+
+requests = [
+    (1, 2, 100),
+    (2, 5, 200),
+    (3, 6, 300),
+    (4, 8, 400),
+    (5, 9, 500),
+    (6, 10, 100)
+]
+
+# Output: Maximum profit for the company owning the drama venue
+max_profit = maxprofit(requests)
+print(max_profit)
