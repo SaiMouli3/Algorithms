@@ -13,7 +13,7 @@ def dijk(graph, source):
                 min_d = dist[v]
         visited[min_v] = True
         for neigh, weigh in graph[min_v]:
-            if not visited[v] and dist[min_v] + weigh < dist[neigh]:
+            if not visited[neigh] and dist[min_v] + weigh < dist[neigh]:
                 dist[neigh] = dist[min_v] + weigh
     return dist
 
