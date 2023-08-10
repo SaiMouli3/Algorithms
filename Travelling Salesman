@@ -1,0 +1,11 @@
+from itertools import permutations
+
+def tsp(distance_matrix):
+    return min(permutations(range(len(distance_matrix))), key=lambda path: sum(distance_matrix[path[i]][path[i + 1]] for i in range(len(path) - 1)) + distance_matrix[path[-1]][path[0]])
+
+distance_matrix = [[0, 2, 0, 12,5],
+                   [2, 0, 4, 8,0],
+                   [0, 4, 0, 3,3],
+                   [12, 8, 3, 0,10],[5,0,3,10,0]]
+tour = tsp(distance_matrix)
+print("The minimum cost tour is:", tour)
