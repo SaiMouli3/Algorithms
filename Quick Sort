@@ -1,0 +1,31 @@
+def quick_sort(arr):
+    # Base case: If the array has 0 or 1 elements, it's already sorted
+    if len(arr) <= 1:
+        return arr
+
+    # Choose a pivot element (here, we'll use the first element)
+    pivot = arr[0]
+
+    # Separate the elements into two groups: less than or equal to pivot, and greater than pivot
+    lesser = []
+    greater = []
+
+    # Iterate through the array, skipping the pivot element
+    for element in arr[1:]:
+        if element <= pivot:
+            lesser.append(element)
+        else:
+            greater.append(element)
+
+    # Recursively sort the sub-arrays and combine them with the pivot in between
+    sorted_lesser = quick_sort(lesser)
+    sorted_greater = quick_sort(greater)
+
+    # Combine the sorted sub-arrays and the pivot to get the final sorted array
+    sorted_array = sorted_lesser + [pivot] + sorted_greater
+    return sorted_array
+
+# Example usage
+input_list = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 19,203]
+sorted_list = quick_sort(input_list)
+print(sorted_list)
