@@ -1,0 +1,16 @@
+def kruskal(graph, V):
+    result, parent = [], list(range(V))
+    for u, v, w in sorted(graph, key=lambda x: x[2]):
+        pu, pv = parent[u], parent[v]
+        if pu != pv:
+            result.append((u, v, w))
+            for i in range(V):
+                if parent[i] == pv:
+                    parent[i] = pu
+    return result
+
+# Example usage
+V = 5
+edges = [(0, 1, 10), (4, 0, 5), (1, 2, 1), (1, 3, 6), (4, 2, 7), (2, 3, 2), (3, 4, 3)]
+minimum_spanning_tree = kruskal(edges, V)
+print(minimum_spanning_tree)
