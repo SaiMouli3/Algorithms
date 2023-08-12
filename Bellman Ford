@@ -1,0 +1,27 @@
+def bellman_ford(graph, source):
+    distances = {node: float('inf') for node in graph}
+    predecessors = {node: None for node in graph}
+    distances[source] = 0
+    
+    for _ in range(len(graph) - 1):
+        for node in graph:
+            for neighbor, weight in graph[node].items():
+                if distances[node] + weight < distances[neighbor]:
+                    distances[neighbor] = distances[node] + weight
+                    predecessors[neighbor] = node
+    return distances, predecessors
+
+graph = {
+    'A': {'B': -4, 'F': -3},
+    'B': {'E': -2, 'D': -1},
+    'C': {'B':8,'F':3},
+    'D': {'F': 4},
+    'E': {'F':2,'C':-3},
+    'F':{}
+}
+
+source_node = 'A'
+distances, predecessors = bellman_ford(graph, source_node)
+print("Shortest distances from", source_node, "to all other nodes:")
+print(distances)
+print("Predecessors:")
