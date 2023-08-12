@@ -1,16 +1,16 @@
 def kruskal(graph, V):
-    result, parent = [], list(range(V))
+    result, parent = [], list(range(V + 1))  # Adjusting for 1-based indexing
     for u, v, w in sorted(graph, key=lambda x: x[2]):
         pu, pv = parent[u], parent[v]
         if pu != pv:
             result.append((u, v, w))
-            for i in range(V):
+            for i in range(1, V + 1):
                 if parent[i] == pv:
                     parent[i] = pu
     return result
 
 # Example usage
 V = 5
-edges = [(0, 1, 10), (4, 0, 5), (1, 2, 1), (1, 3, 6), (4, 2, 7), (2, 3, 2), (3, 4, 3)]
+edges = [(1,2,10),(2,3,1),(3,4,2),(4,5,3),(5,1,5),(3,5,7),(2,4,6)]
 minimum_spanning_tree = kruskal(edges, V)
 print(minimum_spanning_tree)
