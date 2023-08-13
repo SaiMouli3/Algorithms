@@ -1,0 +1,15 @@
+def subset(nums,target):
+    dp=[False]*(target+1)
+    dp[0]=True
+    for num in nums:
+        for j in range(target,num-1,-1):
+            dp[j]=dp[j] or dp[j-num]
+        
+    return dp[target]
+    
+nums = [3, 34, 4, 12, 5, 2]
+target_sum = 51
+if subset(nums, target_sum):
+    print("Subset with the given sum exists.")
+else:
+    print("No subset with the given sum exists.")
