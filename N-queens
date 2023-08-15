@@ -1,45 +1,40 @@
-class Solution(object):
-    def solveNQueens(self, n):
-        """
-        :type n: int
-        :rtype: List[List[str]]
-        """
-        col = set()
-        posDiag = set()  # (r + c)
-        negDiag = set()  # (r - c)
-        res = []
 
-        board = [["." for _ in range(n)] for _ in range(n)]
+def solveNQueens( n):
+    col = set()
+    posDiag = set()  # (r + c)
+    negDiag = set()  # (r - c)
+    res = []
 
-        def backtrack(r):
-            if r == n:
-                copy = ["".join(row) for row in board]
-                res.append(copy)
-                return
+    board = [["." for _ in range(n)] for _ in range(n)]
 
-            for c in range(n):
-                if c in col or (r + c) in posDiag or (r - c) in negDiag:
-                    continue
+    def backtrack(r):
+        if r == n:
+            copy = ["".join(row) for row in board]
+            res.append(copy)
+            return
 
-                col.add(c)
-                posDiag.add(r + c)
-                negDiag.add(r - c)
-                board[r][c] = "Q"
+        for c in range(n):
+            if c in col or (r + c) in posDiag or (r - c) in negDiag:
+                continue
 
-                backtrack(r + 1)
+            col.add(c)
+            posDiag.add(r + c)
+            negDiag.add(r - c)
+            board[r][c] = "Q"
 
-                col.remove(c)
-                posDiag.remove(r + c)
-                negDiag.remove(r - c)
-                board[r][c] = "."
+            backtrack(r + 1)
 
-        backtrack(0)
-        return res
+            col.remove(c)
+            posDiag.remove(r + c)
+            negDiag.remove(r - c)
+            board[r][c] = "."
 
-# Usage
-solution = Solution()
+    backtrack(0)
+    return res
+
+
 n = 4
-solutions = solution.solveNQueens(n)
+solutions =solveNQueens(n)
 for solution in solutions:
     for row in solution:
         print(row)
