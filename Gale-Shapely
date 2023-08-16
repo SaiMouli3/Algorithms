@@ -1,0 +1,48 @@
+def menprefer(newmen,oldmen,wp,women):
+    for men in wp[women]:
+        if men==newmen:
+            return True
+        if men==oldmen:
+            return False
+
+
+def shapely(mp,wp):
+    n=len(mp)
+    menpaired=set()
+    pair=0
+    wpatner={}
+    while pair!=n:
+        for m in mp:
+            if m not in menpaired:
+                freemen=m
+                break
+
+        for w in mp[freemen]:
+            if w not in wpatner:
+                wpatner[w]=freemen
+                menpaired.add(freemen)
+                pair+=1
+                break
+            else:
+                if(menprefer(freemen,wpatner[w],wp,w)):
+                    wpatner[w]=freemen
+                    menpaired.remove(wp[w])
+                    menpaired.add(freemen)
+                    break
+
+    print("Stable Pairs are : ")
+    print('Women', '\t', 'Men')
+    for women in wp:
+        print(women, '\t', wpatner[women])
+
+
+mp = {'a': ['v', 'w', 'x'],
+      'b': ['w', 'v', 'x'],
+      'c': ['v', 'w', 'x']
+      }
+wp = {'v': ['a', 'b', 'c'],
+      'w': ['b', 'c', 'a'],
+      'x': ['c', 'a', 'b']
+      }
+
+shapely(mp, wp)
